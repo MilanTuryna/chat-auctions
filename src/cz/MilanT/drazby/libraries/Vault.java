@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Vault {
     private final JavaPlugin plugin;
-    private Economy econ; // static
+    private Economy econ;
 
     public Vault(JavaPlugin plugin) {
         this.plugin = plugin;

@@ -61,8 +61,10 @@ public class MainCommand implements CommandExecutor {
 
 							Bukkit.broadcastMessage(configManager.getSeperator());
 							Bukkit.broadcastMessage(" ");
-							Bukkit.broadcastMessage("    §6" + player.getDisplayName() + " §7drazi item §b" + item.getAmount() + "x§e "
-									+ Minecraft.getItemFullName(item));
+							Bukkit.broadcastMessage("    " + configManager.getMessage("auction_started")
+									.replace("%ITEM_AMOUNT%", "" + item.getAmount())
+									.replace("%ITEM_NAME%", Minecraft.getItemFullName(item))
+							);
 							Bukkit.broadcastMessage("    " + configManager.getMessage("usage_plus"));
 							Bukkit.broadcastMessage(" ");
 							Bukkit.broadcastMessage(configManager.getSeperator());
@@ -82,13 +84,16 @@ public class MainCommand implements CommandExecutor {
 								this.vault.getEcon().withdrawPlayer(lastTaker, drazba.getPrice());
 								this.drazbaManager.sellAuction(drazba);
 
-								String item = "§b" + drazba.getItemStack().getAmount() + "x §e"
-										+ drazba.getItemStack().getType() + "§r ";
-								player.sendMessage("§7Uspesne jsi prodal item " + item + "§7hraci §a" + lastTaker.getDisplayName());
-								lastTaker.sendMessage("Koupil jsi drazbu od §a" + player.getDisplayName() + "§7, gratulujeme!");
+								ItemStack item = drazba.getItemStack();
+
+								player.sendMessage(configManager.getMessage("auction_selled_owner")
+										.replace("%ITEM_AMOUNT%", "" + item.getAmount())
+										.replace("%ITEM_NAME%", Minecraft.getItemFullName(item))
+										.replace("%LAST_TAKER%", lastTaker.getDisplayName()));
+								lastTaker.sendMessage(configManager.getMessage("auction_selled_lastTaker"));
 							} else {
-								player.sendMessage("Kupujici §a" + lastTaker.getDisplayName() + " §7nema dostatecny obnos, drazba pokracuje.");
-								lastTaker.sendMessage(configManager.getMessage("lasttaker_no_money"));
+								player.sendMessage(configManager.getMessage("player_taker_no_money"));
+								lastTaker.sendMessage(configManager.getMessage("taker_no_money"));
 							}
 						} else {
 							player.sendMessage(configManager.getMessage("no_taker"));
@@ -100,7 +105,7 @@ public class MainCommand implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("konec")) {
 					if (this.drazbaManager.isPlayerAuctioning(player)) {
 						this.drazbaManager.endAuction(player, false);
-						Bukkit.broadcastMessage(prefix + "Hrac §e" + player.getDisplayName() + "§7 svoji drazbu stahl ze systemu, nema kupujici.");
+						Bukkit.broadcastMessage(configManager.getMessage("auction_ended_broadcast"));
 						player.sendMessage(configManager.getMessage("auction_ended_pm"));
 					} else {
 						player.sendMessage(configManager.getError("no_auction_end"));
@@ -112,15 +117,23 @@ public class MainCommand implements CommandExecutor {
 						Player auctionOwner = Bukkit.getPlayer(args[1]);
 						if (auctionOwner != null) {
 							if (this.drazbaManager.isPlayerAuctioning(auctionOwner)) {
-								int price = Integer.parseInt(args[2]);
+								int price;
+								try {
+									price = Integer.parseInt(args[2]);
+								} catch (NumberFormatException exception) {
+									player.sendMessage(configManager.getError("sum_not_number"));
+									return true;
+								}
 								if(auctionOwner != player) {
 									if (this.vault.getEcon().getBalance(player) > price) {
 										Drazba drazba = this.drazbaManager.getDrazba(auctionOwner);
 										if (price > drazba.getPrice()) {
 											this.drazbaManager.getDrazba(auctionOwner).changeLastTaker(player, price);
-											player.sendMessage(prefix + "§aUspesne jsi prihodil §e" + price + " penez§7 do drazby!");
+											player.sendMessage(configManager.getMessage("success_plus")
+													.replace("%ITEM_PRICE%", price + ""));
 										} else {
-											player.sendMessage(prefix + "§cMusis prihodit vetsi obnos jak minuly zajemce §7(§a" + drazba.getPrice() + " penez§7)");
+											player.sendMessage(configManager.getMessage("needed_more_plus").replace("%ITEM_PRICE%", price
+													+ ""));
 										}
 									} else {
 										player.sendMessage(configManager.getError("no_money"));
@@ -144,8 +157,12 @@ public class MainCommand implements CommandExecutor {
 					if(!drazby.isEmpty()) {
 						drazby.forEach((key, value) -> {
 							ItemStack item = value.getItemStack();
-							key.sendMessage("    §6" + key.getDisplayName() + " §7drazi item §b" + item.getAmount() + "x §e" + item.getType() + "§7:§3 "
-									+ value.getPrice() + configManager.getCurrency());
+							player.sendMessage("    " + configManager.getMessage("list_example")
+									.replace("%OWNER%", key.getDisplayName())
+									.replace("%ITEM_PRICE%", value.getPrice() + "")
+									.replace("%ITEM_NAME%", Minecraft.getItemFullName(item))
+									.replace("%ITEM_AMOUNT%", item.getAmount() + "")
+									.replace("%CURRENCY%",configManager.getCurrency()));
 						});
 					} else {
 						// no auction

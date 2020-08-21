@@ -6,20 +6,35 @@
 # %PREFIX% - Ziskani nastaveneho prefixu
 #
 # Other variables:
+# messages.auction_started - %PLAYER% (owner of auction), %ITEM_AMOUNT, %ITEM_NAME
+# messages.auction_selled_owner - %ITEM_AMOUNT%, %ITEM_NAME%, %LAST_TAKER%
+# messages.auction_selled_lastTaker - %PLAYER% (owner of auction)
+# messages.player_taker_no_money - %PLAYER% (owner of auction)
+# messages.list_example - %OWNER%, %CURRENCY%, %ITEM_NAME%, %ITEM_PRICE%, %ITEM_AMOUNT%
+# success_plus - %ITEM_PRICE%
+# ne
 
 prefix: "&8[&6Drazba&8]&7"
 currency: "$"
 separator: "&8-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 messages:
   list_auctions: "%PREFIX% &7Seznam aktivnich drazeb"
-  usage_plus: "&a/drazba prihodit %SENDER% <castka>"
+  usage_plus: "&a/drazba prihodit %PLAYER% <castka>"
+  auction_started: "&6%PLAYER% &7drazi item &b%ITEM_AMOUNT%x &e%ITEM_NAME%"
   auction_ended_pm: "%PREFIX% &7Tva drazba byla stahnuta z drazebniho systemu."
-  auction_ended_broadcast: ""
+  auction_ended_broadcast: "%PREFIX% Hrac &e%player%§7 svoji drazbu stahl ze systemu, nema kupujici."
+  auction_selled_owner: "&7Uspesne jsi prodal item &b%ITEM_AMOUNT%x &e%ITEM_NAME% &7hraci &a%LAST_TAKER%"
+  auction_selled_lastTaker: "%PREFIX% Vyhral jsi a koupil drazbu od &a%PLAYER%&7, gratulujeme!"
   no_auction: "&cZadne drazby se momentalne nedrazi!"
+  success_plus: "%PREFIX% &aUspesne jsi prihodil &e%ITEM_PRICE% penez&a do drazby!"
+  needed_more_plus: "%PREFIX% &cMusis prihodit vetsi obnos jak minuly zajemce &7(&a%ITEM_PRICE% penez&7)"
+  list_example: "&6%OWNER% &7drazi item &b%ITEM_AMOUNT%x &e%ITEM_NAME% &7:&3 %ITEM_PRICE% %CURRENCY%"
   player_quit_auction: "Hrac &a %PLAYER% se odpojil, item mu byl vracen a drazba zrusena!"
-  lasttaker_no_money: "%PREFIX% Kdyz se zapojis do drazby, mas si tu castku §cnechat do konce drazby! &aTak pro priste.."
+  player_taker_no_money: "%PREFIX% Kupujici &a%LAST_TAKER% &7nema dostatecny obnos, drazba pokracuje."
+  taker_no_money: "%PREFIX% Kdyz se zapojis do drazby, mas si tu castku §cnechat do konce drazby! &aTak pro priste.."
   no_taker: "%PREFIX% Jelikoz zatim nemas zajemce, tak item prodat nemuzes. Drazbu muzes ukoncit pomoci &b/drazba end"
 errors:
+  sum_not_number: "%PREFIX% &cPrihazovat muzes pouze bankovni menu, nikoliv nesmyslne pismenka!"
   console_error: "%PREFIX% &cDrazit muzes pouze jako hrac, nikoliv jako konzole!"
   no_auction_sell: "%PREFIX% &cNemuzes ukoncit drazbu a prodat drazebni item kdyz zadnou drazbu neporadas."
   no_auction_end: "%PREFIX% &cNemuzes ukoncit drazbu kdyz zadnou drazbu neporadas."
