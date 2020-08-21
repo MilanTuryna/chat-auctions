@@ -26,13 +26,13 @@ public class Main extends JavaPlugin implements Listener {
 
 		this.log("§aDeveloped by MilanT");
 		if(vault.setupEconomy()) {
-			this.log("§aPlugin na drazby uspesne spusten!");
+			this.log("§aPlugin was enabled");
 			this.vaultActive = true;
 			this.drazbaManager = new DrazbaManager();
 			this.getCommand("drazba").setExecutor(new MainCommand(drazbaManager, configManager, vault));
 		} else {
-			this.log("§cVault nebyl nalezen, nebo nefunguje spravne, plugin se vypne.");
-			this.log("§aPro spravny chod je zapotrebi: §ehttps://github.com/MilkBowl/Vault");
+			this.log("§cVault not found, plugin will be disabled.");
+			this.log("§aFor good work is needed: §ehttps://github.com/MilkBowl/Vault");
 			this.getPluginLoader().disablePlugin(this);
 		}
 	}
@@ -40,7 +40,7 @@ public class Main extends JavaPlugin implements Listener {
 	@Override
 	public void onDisable() {
 		if(vaultActive) {
-			getLogger().info("Plugin na drazby byl vypnut, vsechny itemy byly vraceny");
+			getLogger().info("Plugin is disabled, all items will be returned.");
 			Bukkit.getOnlinePlayers().forEach(player -> {
 				if(this.drazbaManager.isPlayerAuctioning(player)) {
 					this.drazbaManager.endAuction(player, false);
