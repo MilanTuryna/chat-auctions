@@ -1,0 +1,8 @@
+name: Drazba
+main: cz.MilanT.drazby.Main
+version: 1.0
+author: MilanT
+commands:
+  drazba:
+    description: Prikaz pro drazbu
+    usage: /<command>

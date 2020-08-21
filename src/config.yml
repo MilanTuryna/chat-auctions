@@ -1,0 +1,33 @@
+#
+# Drazby, developed by MilanT
+#
+# Variables:
+# %PLAYER% - Vetsinou odesilatel dane zpravy, ve vsech zpravach co jdou odesilatelovi po odeslani, jinak vraci NULL.
+# %PREFIX% - Ziskani nastaveneho prefixu
+#
+# Other variables:
+
+prefix: "&8[&6Drazba&8]&7"
+currency: "$"
+separator: "&8-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
+messages:
+  list_auctions: "%PREFIX% &7Seznam aktivnich drazeb"
+  usage_plus: "&a/drazba prihodit %SENDER% <castka>"
+  auction_ended_pm: "%PREFIX% &7Tva drazba byla stahnuta z drazebniho systemu."
+  auction_ended_broadcast: ""
+  no_auction: "&cZadne drazby se momentalne nedrazi!"
+  player_quit_auction: "Hrac &a %PLAYER% se odpojil, item mu byl vracen a drazba zrusena!"
+  lasttaker_no_money: "%PREFIX% Kdyz se zapojis do drazby, mas si tu castku §cnechat do konce drazby! &aTak pro priste.."
+  no_taker: "%PREFIX% Jelikoz zatim nemas zajemce, tak item prodat nemuzes. Drazbu muzes ukoncit pomoci &b/drazba end"
+errors:
+  console_error: "%PREFIX% &cDrazit muzes pouze jako hrac, nikoliv jako konzole!"
+  no_auction_sell: "%PREFIX% &cNemuzes ukoncit drazbu a prodat drazebni item kdyz zadnou drazbu neporadas."
+  no_auction_end: "%PREFIX% &cNemuzes ukoncit drazbu kdyz zadnou drazbu neporadas."
+  player_offline: "%PREFIX% &cTento hrac neni na serveru!"
+  player_no_auction: "%PREFIX% &cTento hrac neporada zadnou drazbu!"
+  no_money: "%PREFIX% &cNemas dostatecny financni obnos na tento prihoz!"
+  player_not_auctioner: "%PREFIX% &cTento hrac neporada zadnou drazbu!"
+  same_time_auction: "%PREFIX% &cDrazit ve stejny cas muzes pouze jeden item!"
+  custom_auction_plus: "%PREFIX% &cNemuzes prihazovat na svoji vlastni drazbu!"
+  no_item: "%PREFIX% &cPro vytvoreni drazby musis mit chteny item v ruce!"
+  bad_argument: "%PREFIX% &cNespravny argument!&7 Napis prikaz &c/drazby&7 pro prehled prikazu"
