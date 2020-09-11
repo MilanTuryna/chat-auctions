@@ -19,8 +19,6 @@ public class Drazba {
 		this.lastTaker = null;
 	}
 
-
-	// mozna to nepujde -> double -> int
 	public void changeLastTaker(Player player, double price) {
 		this.lastTaker = player;
 		this.price = price;
