@@ -82,6 +82,7 @@ public class MainCommand implements CommandExecutor {
 						if (lastTaker != null) {
 							if (this.vault.getEcon().getBalance(lastTaker) > drazba.getPrice()) {
 								this.vault.getEcon().withdrawPlayer(lastTaker, drazba.getPrice());
+								this.vault.getEcon().depositPlayer(player, drazba.getPrice());
 								this.drazbaManager.sellAuction(drazba);
 
 								ItemStack item = drazba.getItemStack();
