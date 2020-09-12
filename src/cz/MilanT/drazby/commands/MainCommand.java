@@ -155,7 +155,7 @@ public class MainCommand implements CommandExecutor {
 					player.sendMessage(configManager.getSeperator());
 					player.sendMessage(" ");
 					HashMap<Player, Drazba> drazby = this.drazbaManager.getHashMap();
-					if(!drazby.isEmpty()) {
+					if (!drazby.isEmpty()) {
 						drazby.forEach((key, value) -> {
 							ItemStack item = value.getItemStack();
 							player.sendMessage("    " + configManager.getMessage("list_example")
@@ -163,7 +163,7 @@ public class MainCommand implements CommandExecutor {
 									.replace("%ITEM_PRICE%", value.getPrice() + "")
 									.replace("%ITEM_NAME%", Minecraft.getItemFullName(item))
 									.replace("%ITEM_AMOUNT%", item.getAmount() + "")
-									.replace("%CURRENCY%",configManager.getCurrency()));
+									.replace("%CURRENCY%", configManager.getCurrency()));
 						});
 					} else {
 						// no auction

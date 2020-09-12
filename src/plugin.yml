@@ -1,6 +1,7 @@
 name: Drazba
 main: cz.MilanT.drazby.Main
 version: 1.0
+softdepend: [Vault]
 author: MilanT
 commands:
   drazba:
